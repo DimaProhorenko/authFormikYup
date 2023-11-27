@@ -6,7 +6,7 @@ function Input({ label, ...props }) {
 	const [field, meta] = useField(props);
 
 	return (
-		<div className="my-5">
+		<div className="mb-5">
 			<Label htmlFor={props.id}>{label}</Label>
 			<input
 				{...field}

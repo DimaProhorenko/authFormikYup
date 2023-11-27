@@ -1,15 +1,27 @@
-import { Container, Input, Button, Title } from './';
 import { Formik, Form } from 'formik';
 import { object } from 'yup';
+import { Link } from 'react-router-dom';
+
+import { Container, Input, Button, Title } from './';
 import {
 	emailValidation,
 	passwordValidation,
 } from '../validation/inputValidation';
+import { SIGNIN } from '../routes';
 
 function Signup() {
 	return (
 		<Container>
 			<Title>Create your account</Title>
+			<p className="mb-4">
+				Already have an account{' '}
+				<Link
+					className="font-semibold underline hover:text-purple-600"
+					to={SIGNIN}
+				>
+					Signin
+				</Link>
+			</p>
 			<Formik
 				initialValues={{ email: '', password: '' }}
 				validationSchema={object({
@@ -21,7 +33,7 @@ function Signup() {
 				}}
 			>
 				{({ isValid, dirty }) => (
-					<Form className="">
+					<Form>
 						<Input
 							label="Email"
 							id="email"
