@@ -15,18 +15,12 @@ function Account() {
 		setCreatedAt(user?.metadata.createdAt);
 	}, [user]);
 
-	const date = new Date(createdAt);
-	console.log(date);
+	const date = new Date(+createdAt).toLocaleDateString();
 
 	return (
 		<Container>
 			<p>Email: {user?.email || 'No user'}</p>
-			{createdAt && (
-				<p>
-					<span>{createdAt}</span>Created on{' '}
-					{new Date(createdAt).toLocaleDateString()}
-				</p>
-			)}
+			{createdAt && <p>Created on {date}</p>}
 			<Button
 				onClick={() => {
 					logout();

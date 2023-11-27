@@ -1,6 +1,6 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
-import { Signin, Signup, Account } from './components';
+import { Signin, Signup, Account, ProtectedRoute } from './components';
 import { HOME, ACCOUNT, SIGNIN, SIGNUP } from './routes';
 import { AuthContextProvider } from './context/AuthContext';
 
@@ -12,7 +12,14 @@ function App() {
 					<Route path={HOME} element={<Signup />} />
 					<Route path={SIGNUP} element={<Signup />} />
 					<Route path={SIGNIN} element={<Signin />} />
-					<Route path={ACCOUNT} element={<Account />} />
+					<Route
+						path={ACCOUNT}
+						element={
+							<ProtectedRoute>
+								<Account />
+							</ProtectedRoute>
+						}
+					/>
 				</Routes>
 			</BrowserRouter>
 		</AuthContextProvider>

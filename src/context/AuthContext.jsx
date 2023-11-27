@@ -5,10 +5,14 @@ import {
 	signInWithEmailAndPassword,
 	signOut,
 	onAuthStateChanged,
+	signInWithPopup,
+	GoogleAuthProvider,
 } from 'firebase/auth';
 import { auth } from '../firebase';
 
 const UserContext = createContext();
+const googleProvider = new GoogleAuthProvider();
+googleProvider.setCustomParameters({ prompt: 'select_account' });
 
 const createUserEmailPassword = (email, password) => {
 	return createUserWithEmailAndPassword(auth, email, password);
@@ -20,6 +24,10 @@ const loginEmailPassword = (email, password) => {
 
 const logout = () => {
 	return signOut(auth);
+};
+
+const loginWithGoogle = () => {
+	return signInWithPopup(auth, googleProvider);
 };
 
 export const AuthContextProvider = ({ children }) => {
@@ -42,6 +50,7 @@ export const AuthContextProvider = ({ children }) => {
 				createUserEmailPassword,
 				loginEmailPassword,
 				logout,
+				loginWithGoogle,
 			}}
 		>
 			{children}

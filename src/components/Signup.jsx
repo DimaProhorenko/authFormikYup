@@ -2,7 +2,7 @@ import { Formik, Form } from 'formik';
 import { object } from 'yup';
 import { Link, useNavigate } from 'react-router-dom';
 
-import { Container, Input, Button, Title } from './';
+import { Container, Input, Button, Title, SigninMethods } from './';
 import {
 	emailValidation,
 	passwordValidation,
@@ -23,7 +23,7 @@ function Signup() {
 					className="font-semibold underline hover:text-purple-600"
 					to={SIGNIN}
 				>
-					Signin
+					Sign in
 				</Link>
 			</p>
 			<Formik
@@ -32,8 +32,8 @@ function Signup() {
 					...emailValidation,
 					...passwordValidation,
 				})}
-				onSubmit={({ email, password }) => {
-					createUserEmailPassword(email, password);
+				onSubmit={async ({ email, password }) => {
+					await createUserEmailPassword(email, password);
 					navigate(ACCOUNT);
 				}}
 			>
@@ -61,6 +61,7 @@ function Signup() {
 					</Form>
 				)}
 			</Formik>
+			<SigninMethods />
 		</Container>
 	);
 }

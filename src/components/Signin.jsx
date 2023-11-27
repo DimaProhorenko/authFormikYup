@@ -36,8 +36,8 @@ function Signin() {
 					...emailValidation,
 					...passwordValidation,
 				})}
-				onSubmit={({ email, password }) => {
-					loginEmailPassword(email, password);
+				onSubmit={async ({ email, password }) => {
+					await loginEmailPassword(email, password);
 					navigate(ACCOUNT);
 				}}
 			>
@@ -58,6 +58,7 @@ function Signin() {
 						<Button
 							className="block ml-auto"
 							disabled={!(isValid && dirty)}
+							type="submit"
 						>
 							Signin
 						</Button>
