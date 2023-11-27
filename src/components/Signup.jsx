@@ -20,23 +20,29 @@ function Signup() {
 					console.log(value);
 				}}
 			>
-				<Form className="">
-					<Input
-						label="Email"
-						id="email"
-						name="email"
-						placeholder="Email"
-					/>
-					<Input
-						label="Password"
-						id="password"
-						name="password"
-						placeholder="Password"
-					/>
-					<Button type="submit" className="ml-auto block">
-						Sign up
-					</Button>
-				</Form>
+				{({ isValid, dirty }) => (
+					<Form className="">
+						<Input
+							label="Email"
+							id="email"
+							name="email"
+							placeholder="Email"
+						/>
+						<Input
+							label="Password"
+							id="password"
+							name="password"
+							placeholder="Password"
+						/>
+						<Button
+							type="submit"
+							className="ml-auto block"
+							disabled={!(isValid && dirty)}
+						>
+							Sign up {isValid}
+						</Button>
+					</Form>
+				)}
 			</Formik>
 		</Container>
 	);
