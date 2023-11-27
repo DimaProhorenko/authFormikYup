@@ -1,39 +1,43 @@
+/* eslint-disable react/no-unescaped-entities */
 import { Formik, Form } from 'formik';
 import { object } from 'yup';
 import { Link, useNavigate } from 'react-router-dom';
 
-import { Container, Input, Button, Title } from './';
+import { Button, Input, Container, Title } from './';
 import {
 	emailValidation,
 	passwordValidation,
 } from '../validation/inputValidation';
-import { ACCOUNT, SIGNIN } from '../routes';
+import { ACCOUNT, SIGNUP } from '../routes';
 import { UserAuth } from '../context/AuthContext';
 
-function Signup() {
-	const { createUserEmailPassword } = UserAuth();
+function Signin() {
+	const { loginEmailPassword } = UserAuth();
 	const navigate = useNavigate();
 
 	return (
 		<Container>
-			<Title>Create your account</Title>
-			<p className="mb-4">
-				Already have an account{' '}
+			<Title>Sign in to your account</Title>
+			<p>
+				Don't have an account?{' '}
 				<Link
-					className="font-semibold underline hover:text-purple-600"
-					to={SIGNIN}
+					className="underline font-semibold hover:text-purple-600"
+					to={SIGNUP}
 				>
-					Signin
+					Sign up
 				</Link>
 			</p>
 			<Formik
-				initialValues={{ email: '', password: '' }}
+				initialValues={{
+					email: '',
+					password: '',
+				}}
 				validationSchema={object({
 					...emailValidation,
 					...passwordValidation,
 				})}
 				onSubmit={({ email, password }) => {
-					createUserEmailPassword(email, password);
+					loginEmailPassword(email, password);
 					navigate(ACCOUNT);
 				}}
 			>
@@ -41,22 +45,21 @@ function Signup() {
 					<Form>
 						<Input
 							label="Email"
-							id="email"
 							name="email"
+							id="email"
 							placeholder="Email"
 						/>
 						<Input
 							label="Password"
-							id="password"
 							name="password"
+							id="password"
 							placeholder="Password"
 						/>
 						<Button
-							type="submit"
-							className="ml-auto block"
+							className="block ml-auto"
 							disabled={!(isValid && dirty)}
 						>
-							Sign up {isValid}
+							Signin
 						</Button>
 					</Form>
 				)}
@@ -64,4 +67,4 @@ function Signup() {
 		</Container>
 	);
 }
-export default Signup;
+export default Signin;
